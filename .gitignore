@@ -1,0 +1,5 @@
+# python environment files
+env
+
+# editor environment files
+.vscode
