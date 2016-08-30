@@ -1,6 +1,6 @@
 from django.db import models
 
-class Countries(models.Model):
+class Country(models.Model):
     country_id = models.AutoField(db_column='Country_ID', primary_key=True)  # Field name made lowercase.
     country_name = models.CharField(db_column='Country_Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     sub_country_name = models.CharField(db_column='Sub_Country_Name', max_length=255, blank=True, null=True)  # Field name made lowercase.

@@ -22,4 +22,5 @@ urlpatterns = [
 
     # API
     url(r'^categories/', view=include('categories.urls', namespace='categories')),
+    url(r'^countries/', view=include('countries.urls', namespace='countries')),
 ]
