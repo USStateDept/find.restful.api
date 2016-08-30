@@ -1,5 +1,10 @@
-# python environment files
-env
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# distribution / packaging
+bin/
+lib/
 
 # editor environment files
 .vscode
