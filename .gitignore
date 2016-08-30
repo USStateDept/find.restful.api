@@ -1,10 +1,15 @@
 # Byte-compiled / optimized / DLL files
+*.pyc
 __pycache__/
 *.py[cod]
+*$py.class
 
 # distribution / packaging
 bin/
 lib/
+
+# Django stuff:
+*.log
 
 # editor environment files
 .vscode
