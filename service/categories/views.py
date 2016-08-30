@@ -26,8 +26,23 @@ class CategoryDetailAPIView(ListAPIView):
 
   def get_queryset(self, *args, **kwargs):
     queryset_list = Category.objects.all()
-    # query = request.GET.get("q")
-    # if query:
+    category_name = self.kwargs['category_name']
+    print(category_name)
+    if category_name is not None:
+      queryset_list = queryset_list.filter(category_name=category_name)
     return queryset_list
 
+class SubcategoryDetailAPIView(ListAPIView):
+  """
+  Retrive a subcategory by name.
+  """
+  serializer_class = CategoryListSerializer
+
+  def get_queryset(self, *args, **kwargs):
+    queryset_list = Category.objects.all()
+    sub_category_name = self.kwargs['sub_category_name']
+    print(sub_category_name)
+    if sub_category_name is not None:
+      queryset_list = queryset_list.filter(sub_category_name=sub_category_name)
+    return queryset_list
     
