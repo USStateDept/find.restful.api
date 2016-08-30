@@ -16,6 +16,7 @@
 	* run `virtualenv env` 
 	* run `source env/bin/activate`
     * Note: you should have a (env) at the beginning of your terminal lines to show you activated the virutal environment
+  * run `pip install -r requirements.txt`
 5. Inside of the service directory
 	* run `python manage.py migrate`
   * run `python manage.py runserver`
