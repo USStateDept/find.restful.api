@@ -1,6 +1,6 @@
 from django.db import models
 
-class Indicators(models.Model):
+class Indicator(models.Model):
     indicator_id = models.AutoField(db_column='Indicator_ID', primary_key=True)  # Field name made lowercase.
     indicator_name = models.CharField(db_column='Indicator_Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     indicator_url = models.CharField(db_column='Indicator_URL', max_length=520, blank=True, null=True)  # Field name made lowercase.
