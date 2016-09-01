@@ -11,6 +11,6 @@ class DataListSerializer(serializers.ModelSerializer):
             'value',
             'createdat',
             'updatedat',
-            'indicator',
-            'country'
+            'indicator_id',
+            'country_id'
         ]
