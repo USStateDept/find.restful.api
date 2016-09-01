@@ -20,7 +20,8 @@ class CategoryDetailByIdAPIView(RetrieveAPIView):
 class CategoryDetailAPIView(ListAPIView):
   """
   Retrive a category and/or subcategory by name. \n
-  /categories/?category=Health (OR) \n
+  Delimiter is | between values you want to query by. \n
+  /categories/?category=Health|Economic Growth (OR) \n
   /categories/?subcategory=General (OR) \n
   /categories/?category=Health&subcategory=General
   """
@@ -31,18 +32,30 @@ class CategoryDetailAPIView(ListAPIView):
     categories = query_params.get('category', None)
     subcategories = query_params.get('subcategory', None)
     
-    # print('categories: ', categories)
-    # print('subcategories: ',subcategories)
+    # create empty lists for parameters to be filtered by
+    categoryParams = []
+    subcategoryParams = []
+    
+    # create the lists based on the query params
+    if categories is not None:
+      for category in categories.split('|'):
+        categoryParams.append(str(category))
+    if subcategories is not None:
+      for subcategory in subcategories.split('|'):
+        subcategoryParams.append(str(subcategory))
+    
+    # print('categories: ', categoryParams)
+    # print('subcategories: ', subcategoryParams)
     if categories and subcategories is not None:
       queryset_list = Category.objects.all()
-      queryset_list = queryset_list.filter(category_name=categories)
-      queryset_list = queryset_list.filter(sub_category_name=subcategories)
+      queryset_list = queryset_list.filter(category_name__in=categoryParams)
+      queryset_list = queryset_list.filter(sub_category_name__in=subcategoryParams)
       return queryset_list
     if categories is not None:
       queryset_list = Category.objects.all()
-      queryset_list = queryset_list.filter(category_name=categories)
+      queryset_list = queryset_list.filter(category_name__in=categoryParams)
       return queryset_list
     if subcategories is not None:
       queryset_list = Category.objects.all()
-      queryset_list = queryset_list.filter(sub_category_name=subcategories)
+      queryset_list = queryset_list.filter(sub_category_name__in=subcategoryParams)
       return queryset_list
