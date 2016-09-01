@@ -6,11 +6,12 @@ class CategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
+            # Don't want to show some of these fields.'
             'category_id',
             'category_name',
-            'sub_category_name',
-            'createdat',
-            'updatedat'
+            'sub_category_name'
+            # 'createdat',
+            # 'updatedat'
         ]
 
 
