@@ -7,9 +7,13 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
+/service/settings.py
 
 # Django stuff:
 *.log
+
+# DB Model
+/service/models.py
 
 # editor environment files
 .vscode
