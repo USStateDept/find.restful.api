@@ -7,7 +7,7 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
-/service/settings.py
+*/settings.py
 
 # Django stuff:
 *.log
