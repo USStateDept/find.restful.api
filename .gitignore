@@ -7,7 +7,9 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
-*/settings.py
+
+# ignore config settings
+service/service/settings.py
 
 # Django stuff:
 *.log

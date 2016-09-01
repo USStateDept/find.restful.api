@@ -12,12 +12,13 @@
 1. Create a development database on localhost named 'find_development'
 2. Clone repository from find.restful.api master
 3. Restore 'find_development' from backup
-4. Inside the cloned repository
-	* run `virtualenv env` 
+4. Configure the `settings.py` file
+5. Inside the cloned repository
+	* run `virtualenv env`
 	* run `source env/bin/activate`
     * Note: you should have a (env) at the beginning of your terminal lines to show you activated the virutal environment
   * run `pip install -r requirements.txt`
-5. Inside of the service directory
+6. Inside of the service directory
 	* run `python manage.py migrate`
   * run `python manage.py runserver`
 

@@ -13,14 +13,26 @@ class IndicatorListAPIView(ListAPIView):
 
 class IndicatorDetailAPIView(ListAPIView):
   """
-  Retrive a subcountry by name.
+  Retrive a indicator by name. \n
+  Delimiter is | between all the values in your parameters for each variable. \n
+  /indicators/?indicator=Poverty gap at $1.90 a day (2011 PPP)|Physical Integrity Index
   """
   serializer_class = IndicatorListSerializer
 
   def get_queryset(self, *args, **kwargs):
-    queryset_list = Indicator.objects.all()
-    indicator_name = self.kwargs['indicator_name']
-    print(indicator_name)
-    if indicator_name is not None:
-      queryset_list = queryset_list.filter(indicator_name=indicator_name)
-    return queryset_list
+    query_params = self.request.query_params
+    indicators = query_params.get('indicator', None)
+
+    # create an empty list for parameters to be filters by 
+    indicatorParams = []
+
+    # create the list based on the query parameters
+    if indicators is not None:
+      for indicator in indicators.split('|'):
+        indicatorParams.append(str(indicator))
+
+    # print('indicator name: ', indicators)
+    if indicators is not None:
+      queryset_list = Indicator.objects.all()
+      queryset_list = queryset_list.filter(indicator_name__in=indicatorParams)
+      return queryset_list

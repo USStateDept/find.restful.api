@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+# from rest_framework import routers
 
 urlpatterns = [
+    # url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', include('rest_framework_docs.urls')),
 
     # API
     url(r'^categories/', view=include('categories.urls', namespace='categories')),
     url(r'^countries/', view=include('countries.urls', namespace='countries')),
-    url(r'^indicators/', view=include('indicators.urls', namespace='indicators')),
     url(r'^data/', view=include('data.urls', namespace='data')),
+    url(r'^indicators/', view=include('indicators.urls', namespace='indicators')),
 ]

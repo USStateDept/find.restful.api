@@ -7,8 +7,8 @@ from .views import (
     )
 
 urlpatterns = [
-    url(r'^$', IndicatorListAPIView.as_view(), name='list'),
-    url(r'^(?P<indicator_name>[\w, ]+)/name/$', IndicatorDetailAPIView.as_view(), name='indicator_name'),
+    url(r'^$', IndicatorDetailAPIView.as_view(), name='indicator_name'),
+    url(r'^list/$', IndicatorListAPIView.as_view(), name='list'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

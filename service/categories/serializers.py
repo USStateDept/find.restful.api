@@ -13,12 +13,3 @@ class CategoryListSerializer(serializers.ModelSerializer):
             # 'createdat',
             # 'updatedat'
         ]
-
-
-class CategoryDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = [
-            'category_name',
-            'sub_category_name'
-        ]
