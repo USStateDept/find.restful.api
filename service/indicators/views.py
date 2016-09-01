@@ -13,14 +13,16 @@ class IndicatorListAPIView(ListAPIView):
 
 class IndicatorDetailAPIView(ListAPIView):
   """
-  Retrive a subcountry by name.
+  Retrive a indicator by name. \n
+  /indicators/?indicator=Poverty gap at $1.90 a day (2011 PPP)
   """
   serializer_class = IndicatorListSerializer
 
   def get_queryset(self, *args, **kwargs):
-    queryset_list = Indicator.objects.all()
-    indicator_name = self.kwargs['indicator_name']
-    print(indicator_name)
-    if indicator_name is not None:
-      queryset_list = queryset_list.filter(indicator_name=indicator_name)
-    return queryset_list
+    query_params = self.request.query_params
+    indicators = query_params.get('indicator', None)
+    # print('indicator name: ', indicators)
+    if indicators is not None:
+      queryset_list = Indicator.objects.all()
+      queryset_list = queryset_list.filter(indicator_name=indicators)
+      return queryset_list

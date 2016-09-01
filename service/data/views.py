@@ -13,39 +13,28 @@ from .serializers import DataListSerializer
 
 class CountryDataAPIView(ListAPIView):
   """
-  Retrive a country's data for a specific indicator - default for all years.
+  Retrive a country's data for a specific indicator - default for all years. \n
+  /data/?country=202&indicator=22 (OR) \n
+  /data/?country=202&indicator=22&year=2015 \n
   """
-  # lookup_url_kwarg = 'indicator_id' FEATURE to lookup pending on the url key word
   serializer_class = DataListSerializer
 
   def get_queryset(self, *args, **kwargs):
-    queryset_list = Data.objects.all()
-    country_id = self.kwargs['country_id']
-    indicator_id = self.kwargs['indicator_id']
-    print(country_id)
-    print(indicator_id)
-    if country_id and indicator_id is not None:
-      queryset_list = queryset_list.filter(country_id=country_id)
-      queryset_list = queryset_list.filter(indicator_id=indicator_id)
-    return queryset_list
-
-class CountryDataYearAPIView(ListAPIView):
-  """
-  Retrive a country's data for a specific indicator - default for all years.
-  """
-  # lookup_url_kwarg = 'indicator_id' FEATURE to lookup pending on the url key word
-  serializer_class = DataListSerializer
-
-  def get_queryset(self, *args, **kwargs):
-    queryset_list = Data.objects.all()
-    country_id = self.kwargs['country_id']
-    indicator_id = self.kwargs['indicator_id']
-    year = self.kwargs['date']
-    print(country_id)
-    print(indicator_id)
-    print(year)
-    if country_id and indicator_id and year is not None:
-      queryset_list = queryset_list.filter(country_id=country_id)
-      queryset_list = queryset_list.filter(indicator_id=indicator_id)
+    query_params = self.request.query_params
+    countries = query_params.get('country', None)
+    indicators = query_params.get('indicator', None)
+    year = query_params.get('year', None)
+    # print('countries: ', countries)
+    # print('indicators: ', indicators)
+    # print('year: ', year)
+    if countries and indicators and year is not None:
+      queryset_list = Data.objects.all()
+      queryset_list = queryset_list.filter(country_id=countries)
+      queryset_list = queryset_list.filter(indicator_id=indicators)
       queryset_list = queryset_list.filter(date=year)
-    return queryset_list
+      return queryset_list
+    if countries and indicators is not None and year is None:
+      queryset_list = Data.objects.all()
+      queryset_list = queryset_list.filter(country_id=countries)
+      queryset_list = queryset_list.filter(indicator_id=indicators)
+      return queryset_list
