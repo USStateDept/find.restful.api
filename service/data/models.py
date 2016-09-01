@@ -6,8 +6,8 @@ class Data(models.Model):
     value = models.FloatField(db_column='Value', blank=True, null=True)  # Field name made lowercase.
     createdat = models.DateTimeField(db_column='createdAt')  # Field name made lowercase.
     updatedat = models.DateTimeField(db_column='updatedAt')  # Field name made lowercase.
-    indicator = models.ForeignKey(Indicators, db_column='Indicator_ID', blank=True, null=True)  # Field name made lowercase.
-    country = models.ForeignKey(Countries, db_column='Country_ID', blank=True, null=True)  # Field name made lowercase.
+    indicator_id = models.IntegerField(db_column='Indicator_ID', blank=True, null=True)  # Field name made lowercase.
+    country_id = models.IntegerField(db_column='Country_ID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         # managed = False

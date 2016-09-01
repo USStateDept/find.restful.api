@@ -6,11 +6,12 @@ class DataListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Data
         fields = [
-            'data_id',
+            # Don't want to show some of these details.'
+            # 'data_id',
             'date',
             'value',
-            'createdat',
-            'updatedat',
-            'indicator',
-            'country'
+            # 'createdat',
+            # 'updatedat',
+            'indicator_id',
+            'country_id'
         ]

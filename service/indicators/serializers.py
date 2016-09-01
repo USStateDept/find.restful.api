@@ -6,6 +6,7 @@ class IndicatorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Indicator
         fields = [
+            # Don't want to show some of these details.'
             'indicator_id',
             'indicator_name',
             'indicator_url',
@@ -18,8 +19,8 @@ class IndicatorListSerializer(serializers.ModelSerializer):
             'last_source_update_ts',
             'when_to_update_ts',
             'indicator_definition',
-            'createdat',
-            'updatedat',
+            # 'createdat',
+            # 'updatedat',
             'avg_equal',
             'avg_population',
             'avg_gdp'
