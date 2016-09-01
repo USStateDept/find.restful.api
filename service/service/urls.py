@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^countries/', view=include('countries.urls', namespace='countries')),
     url(r'^data/', view=include('data.urls', namespace='data')),
     url(r'^indicators/', view=include('indicators.urls', namespace='indicators')),
+    url(r'^regions/', view=include('regions.urls', namespace='regions')),
 ]
