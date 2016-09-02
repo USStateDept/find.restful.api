@@ -29,9 +29,12 @@ class IndicatorDetailAPIView(ListAPIView):
     # create the list based on the query parameters
     if indicators is not None:
       for indicator in indicators.split('|'):
+        indicator = indicator.replace("%20", " ")
         indicatorParams.append(str(indicator))
 
     # print('indicator name: ', indicators)
+
+    # filter by the parameters
     if indicators is not None:
       queryset_list = Indicator.objects.all()
       queryset_list = queryset_list.filter(indicator_name__in=indicatorParams)

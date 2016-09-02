@@ -29,10 +29,12 @@ class SubcountryDetailAPIView(ListAPIView):
     # create the list based on the query parameters
     if countries is not None:
       for country in countries.split('|'):
+        country = country.replace("%20", " ")
         countryParams.append(str(country))
 
-    # print('countries: ', countries)
+    # filter by the parameters
     if countries is not None:
+      # print('countries: ', countries)
       queryset_list = Country.objects.all()
       queryset_list = queryset_list.filter(sub_country_name__in=countryParams)
       return queryset_list

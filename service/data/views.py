@@ -34,18 +34,22 @@ class CountryDataAPIView(ListAPIView):
     # create the list based on the query parameters
     if countries is not None:
       for country in countries.split('|'):
+        country = country.replace("%20", " ")
         countryParams.append(int(country))
     if indicators is not None:
       for indicator in indicators.split('|'):
+        indicator = indicator.replace("%20", " ")
         indicatorParams.append(int(indicator))
     if years is not None:
       for year in years.split('|'):
+        year = year.replace("%20", " ")
         yearParams.append(int(year))
 
-    print('countries: ', countryParams)
-    print('indicators: ', indicatorParams)
-    print('year: ', yearParams)
+    # print('countries: ', countryParams)
+    # print('indicators: ', indicatorParams)
+    # print('year: ', yearParams)
 
+    # filter by the parameters
     if countries and indicators and years is not None:
       queryset_list = Data.objects.all()
       queryset_list = queryset_list.filter(country_id__in=countryParams)

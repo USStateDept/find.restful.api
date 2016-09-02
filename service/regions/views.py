@@ -29,9 +29,12 @@ class RegionDetailAPIView(ListAPIView):
     # create the list based on the query parameters
     if regions is not None:
       for region in regions.split('|'):
+        region = region.replace("%20", " ")
         regionParams.append(int(region))
 
     # print('region id: ', regions)
+
+    # filter by the parameters
     if regions is not None:
       queryset_list = Region.objects.all()
       queryset_list = queryset_list.filter(region_id__in=regionParams)

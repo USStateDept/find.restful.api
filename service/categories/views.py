@@ -1,3 +1,4 @@
+from slugify import slugify
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Category
@@ -39,23 +40,30 @@ class CategoryDetailAPIView(ListAPIView):
     # create the lists based on the query params
     if categories is not None:
       for category in categories.split('|'):
+        # TODO: figure out slugifying to query by non-case sensitive values for Postgres
+        # category = slugify(category, separator="+")
+        category = category.replace("%20", " ")
         categoryParams.append(str(category))
     if subcategories is not None:
       for subcategory in subcategories.split('|'):
+        # subcategory = slugify(subcategory, separator="+")
+        subcategory = subcategory.replace("%20", " ")
         subcategoryParams.append(str(subcategory))
     
-    # print('categories: ', categoryParams)
-    # print('subcategories: ', subcategoryParams)
+    # filter based on the parameters
     if categories and subcategories is not None:
+      print(categoryParams)
+      print(subcategoryParams)
       queryset_list = Category.objects.all()
-      queryset_list = queryset_list.filter(category_name__in=categoryParams)
-      queryset_list = queryset_list.filter(sub_category_name__in=subcategoryParams)
+      queryset_list = queryset_list.filter(category_name__in=categoryParams).filter(sub_category_name__in=subcategoryParams)
       return queryset_list
     if categories is not None:
+      print(categoryParams)
       queryset_list = Category.objects.all()
       queryset_list = queryset_list.filter(category_name__in=categoryParams)
       return queryset_list
     if subcategories is not None:
+      print(subcategoryParams)
       queryset_list = Category.objects.all()
       queryset_list = queryset_list.filter(sub_category_name__in=subcategoryParams)
       return queryset_list

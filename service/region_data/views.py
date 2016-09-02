@@ -23,24 +23,28 @@ class RegionDataAPIView(ListAPIView):
     indicatorParams = []
     yearParams = []
 
-    print(regions)
-    print(indicators)
+    # print(regions)
+    # print(indicators)
 
     # create the list based on the query parameters
     if regions is not None:
       for region in regions.split('|'):
+        region = region.replace("%20", " ")
         regionParams.append(int(region))
     if indicators is not None:
       for indicator in indicators.split('|'):
+        indicator = indicator.replace("%20", " ")
         indicatorParams.append(int(indicator))
     if years is not None:
       for year in years.split('|'):
+        year = year.replace("%20", " ")
         yearParams.append(int(year))
 
-    print('regions: ', regionParams)
-    print('indicators: ', indicatorParams)
-    print('year: ', yearParams)
+    # print('regions: ', regionParams)
+    # print('indicators: ', indicatorParams)
+    # print('year: ', yearParams)
 
+    # filter by the parameters
     if regions and indicators and years is not None:
       queryset_list = RegionData.objects.all()
       queryset_list = queryset_list.filter(region_id__in=regionParams)
