@@ -15,8 +15,8 @@ class CountryDataAPIView(ListAPIView):
   """
   Retrive a country's data for a specific indicator - default for all years. \n
   Delimiter is | between all the values in your parameters for each variable. \n
-  /data/?country=202&indicator=22 (OR) \n
-  /data/?country=202&indicator=22&year=2015 \n
+  /countries/data/?country=202&indicator=22 (OR) \n
+  /countries/data/?country=202&indicator=22&year=2015 \n
   """
   serializer_class = DataListSerializer
 

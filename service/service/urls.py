@@ -25,7 +25,8 @@ urlpatterns = [
     # API
     url(r'^categories/', view=include('categories.urls', namespace='categories')),
     url(r'^countries/', view=include('countries.urls', namespace='countries')),
-    url(r'^data/', view=include('data.urls', namespace='data')),
+    url(r'^countries/data/', view=include('data.urls', namespace='country_data')),
     url(r'^indicators/', view=include('indicators.urls', namespace='indicators')),
     url(r'^regions/', view=include('regions.urls', namespace='regions')),
+    url(r'^regions/data/', view=include('region_data.urls', namespace='region_data')),
 ]
