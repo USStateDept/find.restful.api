@@ -4,6 +4,9 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Category
 from .serializers import CategoryListSerializer
 
+# from oauth2_provider.views.generic import ProtectedResourceView
+# from django.http import HttpResponse
+
 class CategoryListAPIView(ListAPIView):
   """
   Retrieve a list of all categories.
