@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'countries.apps.CountriesConfig',
     'data.apps.DataConfig',
     'indicators.apps.IndicatorsConfig',
+    'regions.apps.RegionsConfig',
+    'region_data.apps.RegionDataConfig',
+    'oauth2_provider',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [

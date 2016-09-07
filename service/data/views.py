@@ -3,6 +3,8 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Data
 from .serializers import DataListSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 # NOTE: Took out the full list of data -> response is too long and we will never allow this request.
 # class DataListAPIView(ListAPIView):
 #   """
@@ -15,9 +17,12 @@ class CountryDataAPIView(ListAPIView):
   """
   Retrive a country's data for a specific indicator - default for all years. \n
   Delimiter is | between all the values in your parameters for each variable. \n
-  /data/?country=202&indicator=22 (OR) \n
-  /data/?country=202&indicator=22&year=2015 \n
+  /countries/data/?country=202&indicator=22 (OR) \n
+  /countries/data/?country=202&indicator=22&year=2015 \n
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   serializer_class = DataListSerializer
 
   def get_queryset(self, *args, **kwargs):
@@ -34,18 +39,22 @@ class CountryDataAPIView(ListAPIView):
     # create the list based on the query parameters
     if countries is not None:
       for country in countries.split('|'):
+        country = country.replace("%20", " ")
         countryParams.append(int(country))
     if indicators is not None:
       for indicator in indicators.split('|'):
+        indicator = indicator.replace("%20", " ")
         indicatorParams.append(int(indicator))
     if years is not None:
       for year in years.split('|'):
+        year = year.replace("%20", " ")
         yearParams.append(int(year))
 
-    print('countries: ', countryParams)
-    print('indicators: ', indicatorParams)
-    print('year: ', yearParams)
+    # print('countries: ', countryParams)
+    # print('indicators: ', indicatorParams)
+    # print('year: ', yearParams)
 
+    # filter by the parameters
     if countries and indicators and years is not None:
       queryset_list = Data.objects.all()
       queryset_list = queryset_list.filter(country_id__in=countryParams)
