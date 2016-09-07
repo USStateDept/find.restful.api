@@ -3,11 +3,15 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Country
 from .serializers import CountryListSerializer
 
+from rest_framework.permissions import IsAuthenticated
 
 class CountryListAPIView(ListAPIView):
   """
   Retrieve a list of all countries.
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   queryset = Country.objects.all()
   serializer_class = CountryListSerializer
 
@@ -17,6 +21,9 @@ class SubcountryDetailAPIView(ListAPIView):
   Delimiter is | between country names. \n
   /countries/?country=United States of America
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   serializer_class = CountryListSerializer
 
   def get_queryset(self, *args, **kwargs):

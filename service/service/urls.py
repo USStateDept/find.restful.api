@@ -14,51 +14,58 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-# from django.contrib.auth.models import User, Group
 from django.contrib import admin
-# admin.autodiscover()
 
-# from rest_framework import permissions, routers, serializers, viewsets
+from django.views.generic import TemplateView, RedirectView
 
-# from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
-
-
-# first we define the serializers
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-
-
-# class GroupSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Group
-
-
-# ViewSets define the view behavior.
-# class UserViewSet(viewsets.ModelViewSet):
-#     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-
-# class GroupViewSet(viewsets.ModelViewSet):
-#     permission_classes = [permissions.IsAuthenticated, TokenHasScope]
-#     required_scopes = ['groups']
-#     queryset = Group.objects.all()
-#     serializer_class = GroupSerializer
-
-
-# Routers provide an easy way of automatically determining the URL conf
-# router = routers.DefaultRouter()
-# router.register(r'users', UserViewSet)
-# router.register(r'groups', GroupViewSet)
-
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import (
+        obtain_jwt_token,
+        refresh_jwt_token,
+        verify_jwt_token
+    )
 
 urlpatterns = [
-    # url(r'^', include(router.urls)),
+    # Template Views
+    url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
+    url(r'^signup/$', TemplateView.as_view(template_name="signup.html"),
+        name='signup'),
+    url(r'^email-verification/$',
+        TemplateView.as_view(template_name="email_verification.html"),
+        name='email-verification'),
+    url(r'^login/$', TemplateView.as_view(template_name="login.html"),
+        name='login'),
+    url(r'^logout/$', TemplateView.as_view(template_name="logout.html"),
+        name='logout'),
+    url(r'^password-reset/$',
+        TemplateView.as_view(template_name="password_reset.html"),
+        name='password-reset'),
+    url(r'^password-reset/confirm/$',
+        TemplateView.as_view(template_name="password_reset_confirm.html"),
+        name='password-reset-confirm'),
+
+    url(r'^user-details/$',
+        TemplateView.as_view(template_name="user_details.html"),
+        name='user-details'),
+    url(r'^password-change/$',
+        TemplateView.as_view(template_name="password_change.html"),
+        name='password-change'),
+
+    # this url is used to generate email content
+    url(r'^password-reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        TemplateView.as_view(template_name="password_reset_confirm.html"),
+        name='password_reset_confirm'),
+
+
+    # users, administrators, and development document endpoints
+    url(r'^account/', include('rest_auth.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^docs/', include('rest_framework_docs.urls')),
-    # url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # url(r'^docs/', include('rest_framework_docs.urls')),
+    # url(r'^users/registration/', include('rest_auth.registration.urls')),
+    url(r'^users/token/', obtain_jwt_token),
+    url(r'^users/token-refresh/', refresh_jwt_token),
+    url(r'^users/token-verify/', verify_jwt_token),
+
 
     # API
     url(r'^categories/', view=include('categories.urls', namespace='categories')),
@@ -67,4 +74,7 @@ urlpatterns = [
     url(r'^indicators/', view=include('indicators.urls', namespace='indicators')),
     url(r'^regions/', view=include('regions.urls', namespace='regions')),
     url(r'^regions/data/', view=include('region_data.urls', namespace='region_data')),
+
+    # base url
+    url(r'^accounts/profile/$', RedirectView.as_view(url='/', permanent=True), name='profile-redirect'),
 ]

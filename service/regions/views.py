@@ -3,11 +3,15 @@ from rest_framework.generics import ListAPIView
 from .models import Region
 from .serializers import RegionListSerializer
 
+from rest_framework.permissions import IsAuthenticated
 
 class RegionListAPIView(ListAPIView):
   """
   Retrieve a list of all indicators.
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   queryset = Region.objects.all()
   serializer_class = RegionListSerializer
 
@@ -17,6 +21,9 @@ class RegionDetailAPIView(ListAPIView):
   Delimiter is | between all the values in your parameters for each variable. \n
   /regions/?region=4|5|6
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   serializer_class = RegionListSerializer
 
   def get_queryset(self, *args, **kwargs):

@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Indicator
 from .serializers import IndicatorListSerializer
 
+from rest_framework.permissions import IsAuthenticated
 
 class IndicatorListAPIView(ListAPIView):
   """
@@ -17,6 +18,9 @@ class IndicatorDetailAPIView(ListAPIView):
   Delimiter is | between all the values in your parameters for each variable. \n
   /indicators/?indicator=Poverty gap at $1.90 a day (2011 PPP)|Physical Integrity Index
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   serializer_class = IndicatorListSerializer
 
   def get_queryset(self, *args, **kwargs):

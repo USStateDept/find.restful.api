@@ -4,13 +4,15 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Category
 from .serializers import CategoryListSerializer
 
-# from oauth2_provider.views.generic import ProtectedResourceView
-# from django.http import HttpResponse
+from rest_framework.permissions import IsAuthenticated
 
 class CategoryListAPIView(ListAPIView):
   """
   Retrieve a list of all categories.
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   queryset = Category.objects.all()
   serializer_class = CategoryListSerializer
 
@@ -18,6 +20,9 @@ class CategoryDetailByIdAPIView(RetrieveAPIView):
   """
   Retrieve a category by id.
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   queryset = Category.objects.all()
   serializer_class = CategoryListSerializer
 
@@ -29,6 +34,9 @@ class CategoryDetailAPIView(ListAPIView):
   /categories/?subcategory=General (OR) \n
   /categories/?category=Health&subcategory=General
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+  
   serializer_class = CategoryListSerializer
 
   def get_queryset(self, *args, **kwargs):

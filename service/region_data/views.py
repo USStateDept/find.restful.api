@@ -3,6 +3,8 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import RegionData
 from .serializers import RegionDataListSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 class RegionDataAPIView(ListAPIView):
   """
   Retrive a region(s)' data for a specific indicator - default for all years. \n
@@ -10,6 +12,9 @@ class RegionDataAPIView(ListAPIView):
   /regions/data/?region=202&indicator=22 (OR) \n
   /regions/data/?region=202&indicator=22&year=2015 \n
   """
+  # check if logged in
+  permission_classes = (IsAuthenticated,)
+
   serializer_class = RegionDataListSerializer
 
   def get_queryset(self, *args, **kwargs):
