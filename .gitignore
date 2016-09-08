@@ -7,6 +7,7 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
+site/
 
 # ignore config settings
 service/service/settings.py
