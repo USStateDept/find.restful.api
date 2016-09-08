@@ -4,11 +4,15 @@ from .models import Indicator
 from .serializers import IndicatorListSerializer
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class IndicatorListAPIView(ListAPIView):
   """
   Retrieve a list of all indicators.
   """
+  permission_classes = (IsAuthenticated,)
+  authentication_classes = (JSONWebTokenAuthentication,)
+
   queryset = Indicator.objects.all()
   serializer_class = IndicatorListSerializer
 
@@ -20,6 +24,7 @@ class IndicatorDetailAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
+  authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = IndicatorListSerializer
 
