@@ -1,5 +1,4 @@
 site_name: find.restful.api
 pages:
-- Home: index.md
-- About: about.md
-theme: readthedocs
+- Documentation: index.md
+theme: yeti

@@ -4,7 +4,7 @@ from .models import Country
 from .serializers import CountryListSerializer
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class CountryListAPIView(ListAPIView):
   """
@@ -12,7 +12,7 @@ class CountryListAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
-  authentication_classes = (TokenAuthentication,)
+  authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Country.objects.all()
   serializer_class = CountryListSerializer
@@ -25,7 +25,7 @@ class SubcountryDetailAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
-  authentication_classes = (TokenAuthentication,)
+  authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = CountryListSerializer
 

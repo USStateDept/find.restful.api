@@ -5,7 +5,7 @@ from .models import Category
 from .serializers import CategoryListSerializer
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class CategoryListAPIView(ListAPIView):
   """
@@ -13,7 +13,7 @@ class CategoryListAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
-  authentication_classes = (TokenAuthentication,)
+  authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Category.objects.all()
   serializer_class = CategoryListSerializer
@@ -24,7 +24,7 @@ class CategoryDetailByIdAPIView(RetrieveAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
-  authentication_classes = (TokenAuthentication,)
+  authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Category.objects.all()
   serializer_class = CategoryListSerializer
@@ -39,7 +39,7 @@ class CategoryDetailAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
-  authentication_classes = (TokenAuthentication,)
+  authentication_classes = (JSONWebTokenAuthentication,)
   
   serializer_class = CategoryListSerializer
 
