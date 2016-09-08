@@ -1,25 +1,45 @@
-# find.restful.api
+# Welcome to find.restful.api
 
-## Standing up application on OS X
+To see our repository on GitHub visit [here](https://github.com/USStateDept/find.restful.api).
 
-#### Prerequisites
+## Data We Provide
 
-* Install/Update **Python** to version ~ 3.0 or higher
-* Install/Update **Postgres** to version ~ 9.4.0 or higher
-* Install/Update **Virtualenv** to version ~ 15.0.3 or higher
-* **Link to blog post about setting this all up to be added later**
+Data we supply is derived from a collection of publicly-available third-party sources – World Bank,
+United Nations, Freedom House, etc. -- about the state of countries around the world. For instance,
+you can use our API to determine maternal mortality rates in a particular country, or to find out 
+how many people in a set of countries have access to credit.
 
-1. Create a development database on localhost named 'find_development'
-2. Clone repository from find.restful.api master
-3. Restore 'find_development' from backup
-4. Configure the `settings.py` file
-5. Inside the cloned repository
-	* run `virtualenv env`
-	* run `source env/bin/activate`
-    * Note: you should have a (env) at the beginning of your terminal lines to show you activated the virutal environment
-  * run `pip install -r requirements.txt`
-6. Inside of the service directory
-	* run `python manage.py migrate`
-  * run `python manage.py runserver`
+You can retreive all kinds of data pertaining to categories, countries, indicators, and regions.
+With the data you want from each country and region you can then retreive data value for each
+indicator you specify and for which year or years.
 
-#### You should now be up and running on localhost:8000 -> you can check out the api docs at localhost:8000/docs
+## Passing Parameters through the URL
+
+Our API can handle many types of GET requests that will return a broad range of public data.
+However you want to requests and retreive that data will be based on the parameters you pass through the URL.
+Each endpoint we have provided will allow you to pass through specific fields and value in query string format.
+For each end point here are the fields the endpoint looks for:
+
+    - categories/?category=<value1>&subcategory=<value2>
+    - countries/?country=<value1>
+    - countries/data/?country<value1>&indicator<value2>&year=<value3>
+    - indicators/?indicator=<value1>
+    - regions/?region=<value1>
+    - regions/data/?region=<value1>&indicator=<value2>&year=<value3>
+
+A quick thing to note is that when you are requesting multiple values for a specific field in the URL you must use a | **(pipe)**.
+This will allow you to GET multiple countries `/?country=<value1>|<value2>`, etc.  Also note that when you are requesting the endpoints
+at countries/data/ and regions/data/ to get data for **all** the years you do not need to specify a year field - it will default to 'all'.
+
+## API Endpoints
+
+    categories/
+        list/
+    countries/
+        list/
+    countries/data/
+    indicators/
+        list/
+    regions/
+        list/
+    region/data/

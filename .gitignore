@@ -7,6 +7,8 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
+
+# site directory for mkdocs
 site/
 
 # ignore config settings
