@@ -4,6 +4,7 @@ from .models import Data
 from .serializers import DataListSerializer
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 # NOTE: Took out the full list of data -> response is too long and we will never allow this request.
 # class DataListAPIView(ListAPIView):
@@ -22,6 +23,7 @@ class CountryDataAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
+  authentication_classes = (TokenAuthentication,)
 
   serializer_class = DataListSerializer
 

@@ -4,6 +4,7 @@ from .models import RegionData
 from .serializers import RegionDataListSerializer
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class RegionDataAPIView(ListAPIView):
   """
@@ -14,6 +15,7 @@ class RegionDataAPIView(ListAPIView):
   """
   # check if logged in
   permission_classes = (IsAuthenticated,)
+  authentication_classes = (TokenAuthentication,)
 
   serializer_class = RegionDataListSerializer
 
