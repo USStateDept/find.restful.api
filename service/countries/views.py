@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Country
 from .serializers import CountryListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class CountryListAPIView(ListAPIView):
@@ -11,7 +11,7 @@ class CountryListAPIView(ListAPIView):
   Retrieve a list of all countries.
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Country.objects.all()
@@ -24,7 +24,7 @@ class SubcountryDetailAPIView(ListAPIView):
   /countries/?country=United States of America
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = CountryListSerializer

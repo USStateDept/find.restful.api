@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Data
 from .serializers import DataListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 # NOTE: Took out the full list of data -> response is too long and we will never allow this request.
@@ -22,7 +22,7 @@ class CountryDataAPIView(ListAPIView):
   /countries/data/?country=202&indicator=22&year=2015 \n
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = DataListSerializer

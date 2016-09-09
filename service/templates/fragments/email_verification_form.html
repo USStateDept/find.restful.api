@@ -1,4 +1,4 @@
-<!-- Signup form -->
+<!-- email verification form -->
 <form class="form-horizontal ajax-post" role="form" action="{% url 'rest_verify_email' %}">{% csrf_token %}
   <div class="form-group">
     <label for="key" class="col-sm-2 control-label">Key</label>
@@ -13,6 +13,6 @@
       <button type="submit" class="btn btn-default">Verify</button>
     </div>
   </div>
-
-  <div class="form-group api-response"></div>
 </form>
+
+<div class="api-response container"></div>
