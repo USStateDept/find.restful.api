@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView
 from .models import Region
 from .serializers import RegionListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class RegionListAPIView(ListAPIView):
@@ -11,7 +11,7 @@ class RegionListAPIView(ListAPIView):
   Retrieve a list of all indicators.
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Region.objects.all()
@@ -24,7 +24,7 @@ class RegionDetailAPIView(ListAPIView):
   /regions/?region=4|5|6
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = RegionListSerializer

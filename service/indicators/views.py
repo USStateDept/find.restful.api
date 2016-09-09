@@ -3,14 +3,14 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Indicator
 from .serializers import IndicatorListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class IndicatorListAPIView(ListAPIView):
   """
   Retrieve a list of all indicators.
   """
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Indicator.objects.all()
@@ -23,7 +23,7 @@ class IndicatorDetailAPIView(ListAPIView):
   /indicators/?indicator=Poverty gap at $1.90 a day (2011 PPP)|Physical Integrity Index
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = IndicatorListSerializer

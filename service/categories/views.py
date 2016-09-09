@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import Category
 from .serializers import CategoryListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class CategoryListAPIView(ListAPIView):
@@ -12,7 +12,7 @@ class CategoryListAPIView(ListAPIView):
   Retrieve a list of all categories.
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Category.objects.all()
@@ -23,7 +23,7 @@ class CategoryDetailByIdAPIView(RetrieveAPIView):
   Retrieve a category by id.
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   queryset = Category.objects.all()
@@ -38,7 +38,7 @@ class CategoryDetailAPIView(ListAPIView):
   /categories/?category=Health&subcategory=General
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
   
   serializer_class = CategoryListSerializer

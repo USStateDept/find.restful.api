@@ -33,15 +33,14 @@
             <ul class="dropdown-menu" role="menu">
                 <!-- these pages don't require user token -->
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Create Token</a></li>
                 <li><a href="{% url 'email-verification' %}">E-mail Verification</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'password-reset' %}">Reset Password</a></li>
                 <li><a href="{% url 'password-reset-confirm' %}">Password Reset Confirm</a></li>
                 <li class="divider"></li>
                 <!-- these pages require user token -->
                 <li><a href="{% url 'user-details' %}">Account Details</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
                 <li><a href="{% url 'password-change' %}">Change Password</a></li>
+                <li><a href="{% url 'logout' %}">Destroy Key</a></li>
             </ul>
           </li>
         </ul>
@@ -75,10 +74,62 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       var error_response = function(data){
-        $('.api-response').html("API Response: " + data.status + ' ' + data.statusText + '<br/>Content: ' + data.responseText);
+        let finalHtml = '';
+        if ( data.responseJSON ) {
+          for (var key in data.responseJSON) {
+            let label = '';
+            let response = '';
+            let labelHtml = '';
+            let responseHtml = "<div class='col-sm-10'>";
+            if (key == 'password1') {
+              label = 'Password';
+            } else if (key == 'password2') {
+              label = 'Confirm Password'
+            } else if (key == 'email') {
+              label = 'Email';
+            } else if (key == 'username') {
+              label = 'Username';
+            } else if (key == 'non_field_errors') {
+              label = 'Invalid';
+            } else {
+              label = 'Error';
+            }
+
+            for (var i in data.responseJSON[key]) {
+              response += ' ' + data.responseJSON[key][i];
+            }
+
+            labelHtml = "<label for='" + key + "' class='col-sm-2 control-label' style='text-align:right;'>" + label + "</label>";
+            responseHtml += "<input name='" + key + "' type='text' class='form-control' id='" + key + "' style='color:red;' value='" + response + "' readonly></div>";
+
+            finalHtml += "<div class='row' id='" + key + "'>" + labelHtml + responseHtml + "</div>";
+          }
+
+          $('.api-response').html( "<div class='row'><h4>Errors</h4><hr></div>" + finalHtml );
+        }
       }
-      var susccess_response = function(data){
-        $('.api-response').html("API Response: OK<br/>Content: " + JSON.stringify(data));
+      var success_response = function(data){
+        console.log(data);
+        let finalHtml = '';
+        if ( data ) {
+          let label = '';
+          let response = '';
+          let labelHtml = '';
+          let responseHtml = "<div class='col-sm-10'>";
+          if ( data.token ) {
+            labelHtml = "<label for='response' class='col-sm-2 control-label' style='text-align:right;'>Token</label>";
+            responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='" + data.token + "' onfocus='this.select();' onmouseup='return false;' readonly>";
+          } else if ( data.success ) {
+            labelHtml = "<label for='response' class='col-sm-2 control-label' style='text-align:right;'>Response</label>";
+            responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='" + data.success + "' onfocus='this.select();' onmouseup='return false;' readonly>";
+          } else {
+            labelHtml = "<label for='response' class='col-sm-2 control-label' style='text-align:right;'>Response</label>";
+            responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='" + data + "' onfocus='this.select();' onmouseup='return false;' readonly>";
+          }
+          finalHtml += "<div class='row'>" + labelHtml + responseHtml + "</div>";
+          $('.api-response').html( "<div class='row'><h4>Success</h4><hr></div>" + finalHtml );
+          $('.ajax-post').hide();
+        }
       }
 
       $().ready(function(){
@@ -86,7 +137,7 @@
           var form = $('form.ajax-post');
           $.post(form.attr('action'), form.serialize())
           .fail(function(data){error_response(data);})
-          .done(function(data){susccess_response(data);});
+          .done(function(data){success_response(data);});
           return false;
         });
       });

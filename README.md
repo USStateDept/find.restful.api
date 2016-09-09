@@ -46,7 +46,25 @@ at countries/data/ and regions/data/ to get data for **all** the years you do no
 
 ## Signing Up For Tokens
 
-To register an account and receive a token you must first go to the registration page and enter a requested username, your email, and a password
-for your account.  Once you sign up you will receive a verification email.  Once you have verified your account you can then login using your 
-credentials.  After you successfully log in you will see a token that is unique to your account.  This token will expire in **90 days** - to get a
-new token you can either refresh your token or you can login again with your credentials.
+To register an account and receive a token you must first go to the *Sign Up* page and enter a requested username, your email, and a password
+for your account.  
+
+Once you sign up you will receive a temporary token; you will also receive a verification email.  
+
+To verify your account go to the *Verify Email* page from the *Account* dropdown menu.  
+
+Once you have verified your account you can then create a token on the *Create Token* page under the dropdown menu using your credentials. 
+
+After you successfully entered your credentials you will see a token that is unique to your account.  This token will expire in **90 days** - 
+to get a new token you can either refresh your token or you can create a new one again with your credentials. 
+
+## Account Changes
+
+If you forgot your password to request a password change you can click the *Forgot Password* link on the *Create Token* page.
+
+To change your password when you have your registered Token you must go to the *Change Password* link from the dropdown menu.
+To update your password you must have your valid **Token** and enter and confirm a new password.
+
+To update your account information you must have your valid **Token**. Once you have your token you go to the *Account Details* page
+and enter your token. After you enter your token you must "Retreive Account Information" - this will auto fill the fields with your current
+information. You can then change it to valid information and then *Save* your updated information.

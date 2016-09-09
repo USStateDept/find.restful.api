@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import RegionData
 from .serializers import RegionDataListSerializer
 
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class RegionDataAPIView(ListAPIView):
@@ -14,7 +14,7 @@ class RegionDataAPIView(ListAPIView):
   /regions/data/?region=202&indicator=22&year=2015 \n
   """
   # check if logged in
-  permission_classes = (IsAuthenticated,)
+  # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
 
   serializer_class = RegionDataListSerializer
