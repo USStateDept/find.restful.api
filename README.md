@@ -30,19 +30,26 @@ For each end point here are the fields the endpoint looks for:
 A quick thing to note is that when you are requesting multiple values for a specific field in the URL you must use a | **(pipe)**.
 This will allow you to GET multiple countries `/?country=<value1>|<value2>`, etc.  Also note that when you are requesting the endpoints
 at countries/data/ and regions/data/ to get data for **all** the years you do not need to specify a year field - it will default to 'all'.
+You also do not need to enter a category or subcategory based on what kind of data you want to get back. (You can request categories and/or subcategories)
 
 ## API Endpoints
 
     categories/
         list/
+        - fields : category (category name), subcategory (subcategory name)
     countries/
         list/
+        - fields : country (subcountry name)
     countries/data/
+        - fields : country (country id), indicator (indicator id), year (valid 4 digit year)
     indicators/
         list/
+        - fields : indicator (indicator name)
     regions/
         list/
+        - fields : region (region name)
     region/data/
+        - fields : region (region id), indicator (indicator id), year (valid 4 digit year)
 
 ## Signing Up For Tokens
 
