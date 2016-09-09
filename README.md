@@ -1,4 +1,4 @@
-# Welcome to find.restful.api
+# Welcome to the FIND API
 
 To see our repository on GitHub visit [here](https://github.com/USStateDept/find.restful.api).
 
