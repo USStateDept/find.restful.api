@@ -43,3 +43,10 @@ at countries/data/ and regions/data/ to get data for **all** the years you do no
     regions/
         list/
     region/data/
+
+## Signing Up For Tokens
+
+To register an account and receive a token you must first go to the registration page and enter a requested username, your email, and a password
+for your account.  Once you sign up you will receive a verification email.  Once you have verified your account you can then login using your 
+credentials.  After you successfully log in you will see a token that is unique to your account.  This token will expire in **90 days** - to get a
+new token you can either refresh your token or you can login again with your credentials.
