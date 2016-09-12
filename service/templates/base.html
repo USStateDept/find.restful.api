@@ -7,7 +7,7 @@
     <meta name="description" content="find.stata.gov API">
     <meta name="author" content="Jordan Taylor">
 
-    <title>find.restful.api</title>
+    <title>FIND API</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -52,7 +52,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">find.restful.api</a>
+          <a class="navbar-brand" href="/">FIND API</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -74,6 +74,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       var error_response = function(data){
+        // console.log(data);
         let finalHtml = '';
         if ( data.responseJSON ) {
           for (var key in data.responseJSON) {
@@ -124,7 +125,7 @@
             responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='" + data.success + "' onfocus='this.select();' onmouseup='return false;' readonly>";
           } else {
             labelHtml = "<label for='response' class='col-sm-2 control-label' style='text-align:right;'>Response</label>";
-            responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='" + data + "' onfocus='this.select();' onmouseup='return false;' readonly>";
+            responseHtml += "<input name='response' type='text' class='col-sm-10 form-control' id='response' value='Successful' onfocus='this.select();' onmouseup='return false;' readonly>";
           }
           finalHtml += "<div class='row'>" + labelHtml + responseHtml + "</div>";
           $('.api-response').html( "<div class='row'><h4>Success</h4><hr></div>" + finalHtml );
