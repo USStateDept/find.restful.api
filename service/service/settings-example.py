@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'key'
+# Replace KEY with the valid key
+SECRET_KEY = 'KEY'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,23 +34,34 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'allauth',                      # for django-rest-auth
+    'allauth.account',              # for django-rest-auth
+    'jet',
+    'jet.dashboard',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',          # use for general authentication
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',         # for django-rest-auth
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework_docs',
+    'rest_auth.registration',       # for django-rest-auth
+    'rest_framework',               # for DRF!
+    'rest_framework_docs',          # used for development
+    'rest_framework.authtoken',     # use authentication tokens
+    'rest_auth',                    # for django-rest-auth
     'categories.apps.CategoriesConfig',
     'countries.apps.CountriesConfig',
     'data.apps.DataConfig',
     'indicators.apps.IndicatorsConfig',
     'regions.apps.RegionsConfig',
     'region_data.apps.RegionDataConfig',
-    'oauth2_provider',
-    'corsheaders',
 ]
+
+# development emailing to console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +78,7 @@ ROOT_URLCONF = 'service.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,13 +96,13 @@ WSGI_APPLICATION = 'service.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+# Development settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbname',
-        'USER': 'user',
-        'PASSWORD': 'pass',
+        'NAME': 'find_development',
+        'USER': 'postgres',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -96,7 +110,27 @@ DATABASES = {
 
 #  Django Rest Framework
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    # This is only for staging/production (comment this out for development)
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    # This is for throttling the requests
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.ScopedRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'generic': '10000/day',
+        'register_view': '5/h',
+    }
 }
 
 
@@ -131,6 +165,21 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# django-rest-auth
+REST_USE_JWT = True         # turn on jwt for rest-auth
+
+# jwt 
+JWT_AUTH = {
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_VERIFY': True,                     # allows for verifying tokens
+    'JWT_VERIFY_EXPIRATION': False,         # don't check expiration on tokens allow them to work forever
+    'JWT_ALLOW_REFRESH': True,              # allow for refreshing of tokens - generates a new one with the old one provided
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=90), # tokens expire in 90 days
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',        # use Bearer in the header of your ajax calls Authorization: JWT <your token>
+}
+
+UNICODE_JSON = True
 
 
 # Static files (CSS, JavaScript, Images)
