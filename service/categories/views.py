@@ -14,20 +14,22 @@ class CategoryListAPIView(ListAPIView):
   # check if logged in
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
 
   queryset = Category.objects.all()
   serializer_class = CategoryListSerializer
 
-class CategoryDetailByIdAPIView(RetrieveAPIView):
-  """
-  Retrieve a category by id.
-  """
-  # check if logged in
-  # permission_classes = (IsAuthenticated,)
-  authentication_classes = (JSONWebTokenAuthentication,)
+# class CategoryDetailByIdAPIView(RetrieveAPIView):
+#   """
+#   Retrieve a category by id.
+#   """
+#   # check if logged in
+#   # permission_classes = (IsAuthenticated,)
+#   authentication_classes = (JSONWebTokenAuthentication,)
+#   throttle_scope = 'generic'
 
-  queryset = Category.objects.all()
-  serializer_class = CategoryListSerializer
+#   queryset = Category.objects.all()
+#   serializer_class = CategoryListSerializer
 
 class CategoryDetailAPIView(ListAPIView):
   """
@@ -40,6 +42,7 @@ class CategoryDetailAPIView(ListAPIView):
   # check if logged in
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
   
   serializer_class = CategoryListSerializer
 
