@@ -12,6 +12,7 @@ class IndicatorListAPIView(ListAPIView):
   """
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
 
   queryset = Indicator.objects.all()
   serializer_class = IndicatorListSerializer
@@ -25,6 +26,7 @@ class IndicatorDetailAPIView(ListAPIView):
   # check if logged in
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
 
   serializer_class = IndicatorListSerializer
 

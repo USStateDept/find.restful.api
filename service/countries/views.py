@@ -13,6 +13,7 @@ class CountryListAPIView(ListAPIView):
   # check if logged in
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
 
   queryset = Country.objects.all()
   serializer_class = CountryListSerializer
@@ -26,6 +27,7 @@ class SubcountryDetailAPIView(ListAPIView):
   # check if logged in
   # permission_classes = (IsAuthenticated,)
   authentication_classes = (JSONWebTokenAuthentication,)
+  throttle_scope = 'generic'
 
   serializer_class = CountryListSerializer
 
