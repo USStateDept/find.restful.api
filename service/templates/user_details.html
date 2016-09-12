@@ -28,7 +28,7 @@
 
           $.ajax({
             url: "{% url 'rest_user_details' %}",
-            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Token '+token);},
+            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer '+token);},
             type: "GET",
             success: function(data) {
               $('input[name=username]').val(data.username);
@@ -47,7 +47,7 @@
             url: form.attr('action'),
             data: $('form').serialize(),
             type: "PUT",
-            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Token '+token);}
+            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer '+token);}
           }).fail(function(data){error_response(data);})
           .done(function(data){success_response(data);});
           return false;
