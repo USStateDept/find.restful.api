@@ -8,7 +8,7 @@ class CountryListSerializer(serializers.ModelSerializer):
         fields = [
             'country_id',
             'country_name',
-            'sub_country_name',
+            'name',
             'dod_group',
             'dos_group',
             'usaid_group',

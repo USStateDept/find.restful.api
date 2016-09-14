@@ -8,6 +8,7 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
+config.ini
 
 # site directory for mkdocs
 site/
