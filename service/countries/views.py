@@ -18,9 +18,9 @@ class CountryListAPIView(ListAPIView):
   queryset = Country.objects.all()
   serializer_class = CountryListSerializer
 
-class SubcountryDetailAPIView(ListAPIView):
+class CountryDetailAPIView(ListAPIView):
   """
-  Retrive a subcountry by name(s). \n
+  Retrive a country by name(s). \n
   Delimiter is | between country names. \n
   /countries/?country=United States of America
   """
@@ -48,5 +48,5 @@ class SubcountryDetailAPIView(ListAPIView):
     if countries is not None:
       # print('countries: ', countries)
       queryset_list = Country.objects.all()
-      queryset_list = queryset_list.filter(sub_country_name__in=countryParams)
+      queryset_list = queryset_list.filter(name__in=countryParams)
       return queryset_list

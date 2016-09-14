@@ -3,7 +3,7 @@ from django.db import models
 class Country(models.Model):
     country_id = models.AutoField(db_column='Country_ID', primary_key=True)  # Field name made lowercase.
     country_name = models.CharField(db_column='Country_Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    sub_country_name = models.CharField(db_column='Sub_Country_Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     continent = models.CharField(db_column='Continent', max_length=255, blank=True, null=True)  # Field name made lowercase.
     dod_group = models.CharField(db_column='DOD_Group', max_length=255, blank=True, null=True)  # Field name made lowercase.
     dos_group = models.CharField(db_column='DOS_Group', max_length=255, blank=True, null=True)  # Field name made lowercase.
