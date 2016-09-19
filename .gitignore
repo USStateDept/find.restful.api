@@ -10,6 +10,9 @@ bin/
 lib/
 config.ini
 
+# static files
+service/static/
+
 # site directory for mkdocs
 site/
 

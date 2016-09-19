@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.views.generic import TemplateView, RedirectView
 
@@ -56,7 +58,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="password_reset_confirm.html"),
         name='password_reset_confirm'),
 
-
     # users, administrators, and development document endpoints
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
@@ -80,4 +81,4 @@ urlpatterns = [
 
     # base url
     url(r'^accounts/profile/$', RedirectView.as_view(url='/', permanent=True), name='profile-redirect'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Static settings
