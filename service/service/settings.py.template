@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'allauth',                      # for django-rest-auth
     'allauth.account',              # for django-rest-auth
+    'analytical',
     'jet',
     'jet.dashboard',
     'django.contrib.admin',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',         # for django-rest-auth
     'django.contrib.staticfiles',
+    'django_ses',
     'rest_auth.registration',       # for django-rest-auth
     'rest_framework',               # for DRF!
     'rest_framework_docs',          # used for development
@@ -171,7 +173,7 @@ REST_USE_JWT = True         # turn on jwt for rest-auth
 
 # jwt 
 JWT_AUTH = {
-    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALGORITHM': 'HS256',               
     'JWT_VERIFY': True,                     # allows for verifying tokens
     'JWT_VERIFY_EXPIRATION': False,         # don't check expiration on tokens allow them to work forever
     'JWT_ALLOW_REFRESH': True,              # allow for refreshing of tokens - generates a new one with the old one provided
@@ -180,7 +182,6 @@ JWT_AUTH = {
 }
 
 UNICODE_JSON = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

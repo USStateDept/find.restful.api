@@ -70,6 +70,8 @@ urlpatterns = [
     url(r'^users/token-refresh/', refresh_jwt_token),
     url(r'^users/token-verify/', verify_jwt_token),
 
+    url(r'^admin/django-ses/', include('django_ses.urls')),
+
 
     # API
     url(r'^categories/', view=include('categories.urls', namespace='categories')),
