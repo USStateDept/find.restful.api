@@ -18,6 +18,7 @@ site/
 
 # ignore config settings
 service/service/settings.py
+service/service/production.settings.py
 
 # Django stuff:
 *.log
