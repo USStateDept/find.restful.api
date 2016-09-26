@@ -1,5 +1,6 @@
 from slugify import slugify
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Category
 from .serializers import CategoryListSerializer
@@ -7,7 +8,7 @@ from .serializers import CategoryListSerializer
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-class CategoryListAPIView(ListAPIView):
+class CategoryListAPIView(LoggingMixin, ListAPIView):
   """
   Retrieve a list of all categories.
   """
@@ -31,7 +32,7 @@ class CategoryListAPIView(ListAPIView):
 #   queryset = Category.objects.all()
 #   serializer_class = CategoryListSerializer
 
-class CategoryDetailAPIView(ListAPIView):
+class CategoryDetailAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a category and/or subcategory by name. \n
   Delimiter is | between values you want to query by. \n

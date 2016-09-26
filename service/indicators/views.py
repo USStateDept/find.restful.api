@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Indicator
 from .serializers import IndicatorListSerializer
@@ -6,7 +7,7 @@ from .serializers import IndicatorListSerializer
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-class IndicatorListAPIView(ListAPIView):
+class IndicatorListAPIView(LoggingMixin, ListAPIView):
   """
   Retrieve a list of all indicators.
   """
@@ -17,7 +18,7 @@ class IndicatorListAPIView(ListAPIView):
   queryset = Indicator.objects.all()
   serializer_class = IndicatorListSerializer
 
-class IndicatorDetailAPIView(ListAPIView):
+class IndicatorDetailAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a indicator by name. \n
   Delimiter is | between all the values in your parameters for each variable. \n

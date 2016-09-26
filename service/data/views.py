@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Data
 from .serializers import DataListSerializer
@@ -14,7 +15,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 #   queryset = Data.objects.all()
 #   serializer_class = DataListSerializer
 
-class CountryDataAPIView(ListAPIView):
+class CountryDataAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a country's data for a specific indicator - default for all years. \n
   Delimiter is | between all the values in your parameters for each variable. \n
