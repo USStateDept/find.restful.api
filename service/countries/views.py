@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Country
 from .serializers import CountryListSerializer
@@ -6,7 +7,7 @@ from .serializers import CountryListSerializer
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-class CountryListAPIView(ListAPIView):
+class CountryListAPIView(LoggingMixin, ListAPIView):
   """
   Retrieve a list of all countries.
   """
@@ -18,7 +19,7 @@ class CountryListAPIView(ListAPIView):
   queryset = Country.objects.all()
   serializer_class = CountryListSerializer
 
-class CountryDetailAPIView(ListAPIView):
+class CountryDetailAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a country by name(s). \n
   Delimiter is | between country names. \n

@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Region
 from .serializers import RegionListSerializer
@@ -6,7 +7,7 @@ from .serializers import RegionListSerializer
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-class RegionListAPIView(ListAPIView):
+class RegionListAPIView(LoggingMixin, ListAPIView):
   """
   Retrieve a list of all indicators.
   """
@@ -18,7 +19,7 @@ class RegionListAPIView(ListAPIView):
   queryset = Region.objects.all()
   serializer_class = RegionListSerializer
 
-class RegionDetailAPIView(ListAPIView):
+class RegionDetailAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a region by id(s). \n
   Delimiter is | between all the values in your parameters for each variable. \n

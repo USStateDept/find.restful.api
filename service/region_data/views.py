@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import RegionData
 from .serializers import RegionDataListSerializer
@@ -6,7 +7,7 @@ from .serializers import RegionDataListSerializer
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-class RegionDataAPIView(ListAPIView):
+class RegionDataAPIView(LoggingMixin, ListAPIView):
   """
   Retrive a region(s)' data for a specific indicator - default for all years. \n
   Delimiter is | between all the values in your parameters for each variable. \n
