@@ -5,6 +5,7 @@ defusedxml==0.4.1
 Django==1.10
 django-allauth==0.27.0
 django-analytical==2.2.1
+django-bootstrap-themes==3.3.6
 django-braces==1.9.0
 django-cors-headers==1.1.0
 django-crispy-forms==1.6.0
