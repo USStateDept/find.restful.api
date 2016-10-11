@@ -8,6 +8,7 @@ __pycache__/
 # distribution / packaging
 bin/
 lib/
+env/
 config.ini
 
 # static files
