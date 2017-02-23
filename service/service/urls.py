@@ -63,7 +63,7 @@ urlpatterns = [
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r'^account', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
-    # url(r'^docs/', include('rest_framework_docs.urls')),
+    url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     url(r'^users/token/', obtain_jwt_token),
