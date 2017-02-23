@@ -35,13 +35,17 @@
 
 The process after cloning is done in a linux [screen](https://linux.die.net/man/1/screen) so it will run without terminating when you close your ssh connection. (NOTE this is not best practice should explore other options like systemd, containers, etc.)
 
+#### Make sure you have the production `settings.py` file
+
 ```
 git clone https://github.com/USStateDept/find.restful.api.git
+cp settings.py find.restful.api/service/service/
 screen
 cd find.restful.api
 pyvenv <environment-directory>
 source <environment-directory>/bin/activate
 pip install -r requirements.txt
+python service/manage.py collectstatic
 gunicorn -b 127.0.0.1:8001 service/service.wsgi
 ```
 
